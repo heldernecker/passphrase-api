@@ -1,6 +1,7 @@
 package com.necker.passphrasegen;
 
 import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -14,12 +15,12 @@ public class PassphraseController {
 
     @CrossOrigin
     @GetMapping("/passphrase")
-    public String getPassphrase(@RequestParam int length) {
+    public ResponseEntity<PassphraseDto> getPassphrase(@RequestParam int length) {
         if (length > 100) {
             throw new ResponseStatusException(
                     HttpStatus.BAD_REQUEST, "Length has to be equal or less than 100"
             );
         }
-        return service.generatePassphrase(length);
+        return new ResponseEntity<>(service.generatePassphrase(length), HttpStatus.OK);
     }
 }

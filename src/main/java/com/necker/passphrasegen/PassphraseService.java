@@ -8,9 +8,9 @@ import java.util.HashMap;
 import java.util.Random;
 
 public class PassphraseService {
-    String path = "src/main/resources/wordlist/eff_short_wordlist_1.txt";
+    String path = "src/main/resources/wordlist/eff_large_wordlist.txt";
 
-    public String generatePassphrase(int length) {
+    public PassphraseDto generatePassphrase(int length) {
         String finalPassphrase = "";
         HashMap<Integer, String> words = new HashMap<>();
         try {
@@ -18,7 +18,7 @@ public class PassphraseService {
             String word;
             int count = 0;
             while ((word = reader.readLine()) != null) {
-                words.put(count, word.substring(5));
+                words.put(count, word.substring(6));
                 count++;
             }
             reader.close();
@@ -39,6 +39,6 @@ public class PassphraseService {
             e.printStackTrace();
         }
 
-        return finalPassphrase;
+        return new PassphraseDto(finalPassphrase);
     }
 }
