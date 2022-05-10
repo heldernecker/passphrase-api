@@ -17,7 +17,7 @@ public class PassphraseController {
     public String getPassphrase(@RequestParam int length) {
         if (length > 100) {
             throw new ResponseStatusException(
-                    HttpStatus.BAD_REQUEST, "Length has to be less than 100"
+                    HttpStatus.BAD_REQUEST, "Length has to be equal or less than 100"
             );
         }
         return service.generatePassphrase(length);
